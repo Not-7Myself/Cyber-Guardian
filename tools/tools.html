@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="tools.css">
+    <title>CyberGuardian | Tools</title>
+</head>
+<body>
+    <section class="header">
+        <nav>
+            <a href="index.html"><img src="../images/9e0a9d49-6f2f-40ca-8780-5e7e47208e85.jpg"></a>
+            <div class="links">
+                <ul>
+                    <li><a href="../home/index.html">HOME</a></li>
+                    <li><a href="../docs/docs.html">DOCS</a></li>
+                    <li><a href="">TOOLS</a></li>
+                </ul>
+            </div>
+        </nav>
+        <div class="text">
+            <h1>Use different Cyber Security related tools.</h1>
+        </div>
+    </section>
+    <div class="strength">
+        <h1>Password Strength Checker</h1>
+        <label for="password">Password:</label>
+        <input type="password" id="password" oninput="checkPasswordStrength(this.value)">
+        <div id="password-strength"></div>
+
+        <script>
+            function checkPasswordStrength(password) {
+                // Define the regular expressions for password strength
+                const regex = {
+                    weak: /^.{1,6}$/,
+                    medium: /^(.{6,8}|[a-zA-Z]+\d+|\d+[a-zA-Z]+)$/,
+                    strong: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/
+                };
+
+                let strength = 'weak';
+
+                if (regex.strong.test(password)) {
+                    strength = 'strong';
+                } else if (regex.medium.test(password)) {
+                    strength = 'medium';
+                }
+
+                const passwordStrengthElement = document.getElementById('password-strength');
+                passwordStrengthElement.textContent = `Password Strength: ${strength.toUpperCase()}`;
+                passwordStrengthElement.className = strength;
+            }
+        </script>
+    </div>
+    <br>
+    <div class="generate">
+        <h1>Password Generator</h1>
+        <form id="password-form">
+            <label for="generated-password">Generated Password:</label>
+            <input type="text" id="generated-password" readonly>
+            <button type="button" onclick="generatePassword()">Generate Password</button>
+        </form>
+    
+        <script>
+            function generatePassword() {
+                const length = 10; // Change the length of the generated password
+                const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+~`|}{[]\:;?><,./-=";
+    
+                let password = "";
+                for (let i = 0; i < length; ++i) {
+                    const randomChar = charset.charAt(Math.floor(Math.random() * charset.length));
+                    password += randomChar;
+                }
+    
+                document.getElementById("generated-password").value = password;
+            }
+        </script>
+    </div>
+</body>
+</html>
